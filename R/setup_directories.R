@@ -6,14 +6,15 @@
 #' @param img_subdir one subdirectory
 #' @param img_subdir2 a second subdirectory
 #' @param logfile_dir the log file directory
-#' @return four dir within your working directory
+#' @return the created directories (invisibly)
 #' @export
 #' @examples
+#' \dontrun{
 #' setup_directories("img/", "everything/", "handpicked/", "logfile/")
+#' }
 
 setup_directories <- function(img_path, img_subdir, img_subdir2, logfile_dir) {
-  ifelse(!dir.exists(img_path), dir.create(img_path), NA)
-  ifelse(!dir.exists(paste0(img_path, img_subdir)), dir.create(paste0(img_path, "/", img_subdir)), NA)
-  ifelse(!dir.exists(paste0(img_path, img_subdir2)), dir.create(paste0(img_path, "/", img_subdir2)), NA)
-  ifelse(!dir.exists(logfile_dir), dir.create(logfile_dir), NA)
+  dirs <- c(file.path(img_path, img_subdir), file.path(img_path, img_subdir2), logfile_dir)
+  for (d in dirs) dir.create(d, showWarnings = FALSE, recursive = TRUE)
+  invisible(dirs)
 }

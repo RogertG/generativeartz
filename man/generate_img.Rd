@@ -4,28 +4,56 @@
 \alias{generate_img}
 \title{Generate multiple generative images}
 \usage{
-generate_img(formula, nr_of_img, polar = FALSE, filetype = "png", ...)
+generate_img(
+  formula,
+  nr_of_img,
+  polar = FALSE,
+  filetype = "png",
+  ...,
+  img_path = default_img_path(),
+  logfile_path = default_logfile_path()
+)
 }
 \arguments{
-\item{formula}{the formula you want to use as a list}
+\item{formula}{the formula you want to use as a list with elements `x` and `y`}
 
 \item{nr_of_img}{the number of images that should be created}
 
-\item{polar}{logical should the plot have a polar coordinate system ("polar = TRUE") or a cartesian coordinate system ("polar = FALSE")}
+\item{polar}{logical should the plot have a polar coordinate system ("polar = TRUE") or a
+cartesian coordinate system ("polar = FALSE")}
 
-\item{filetype}{filetype of the final image. Default is `png`, for other options see the `devics` argument in `gggplot::gsave()`}
+\item{filetype}{file type of the final image. Default is `png`, for other options see the
+`device` argument in `ggplot2::ggsave()`}
 
-\item{...}{further arguments like color and background_color}
+\item{...}{further parameters: `color`, `background_color`, `alpha`, `size`, `shape`,
+`width`, `height` (see `generate_plot()`) and `range_from`, `range_to`, `step`
+(see `generate_data()`)}
+
+\item{img_path}{directory the images are saved in. Defaults to the global variable
+`IMG_PATH` if it exists, otherwise `"img/everything/"`.}
+
+\item{logfile_path}{path of the log file. Defaults to the global variable `LOGFILE_PATH`
+if it exists, otherwise `"logfile/logfile.csv"`.}
 }
 \value{
-as many png files as you net in "nr_of_img"
+the paths of the saved images (invisibly)
 }
 \description{
-This is the main function of the package generativeimgR. It calls all the other function neccessary to produce multiple generative images at once.
+This is the main function of the package. It calls all the other functions necessary to
+produce multiple generative images at once. Every image gets its own random seed, and the
+seed, the formula and all parameters are written to the log file, so that every image can
+be recreated with `regenerate_img()`.
 }
 \examples{
+\dontrun{
+my_formula <- list(
+  x = quote(runif(1, -1, 1) * x_i^2 - sin(y_i^2)),
+  y = quote(runif(1, -1, 1) * y_i^3 - cos(x_i^2))
+)
 generate_img(formula = my_formula, nr_of_img = 3, polar = FALSE)
-generate_img(formula = my_formula, nr_of_img = 3, polar = FALSE, color = "#101820", background_color = "#F2AA4C")
+generate_img(formula = my_formula, nr_of_img = 3, polar = TRUE,
+             color = "#101820", background_color = "#F2AA4C", alpha = 0.1)
+}
 }
 \seealso{
 \code{\link{generate_seeds}} generate the seeds for the randomness
@@ -38,5 +66,5 @@ generate_img(formula = my_formula, nr_of_img = 3, polar = FALSE, color = "#10182
 
 \code{\link{generate_data}} generate the data depending on the formula
 
-\code{\link{generate_plot}} plot the data and save a png file
+\code{\link{generate_plot}} plot the data and save an image file
 }

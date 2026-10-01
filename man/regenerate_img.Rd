@@ -4,23 +4,46 @@
 \alias{regenerate_img}
 \title{Recreate an image}
 \usage{
-regenerate_img(seed_to_recreate, filetype, polar = FALSE)
+regenerate_img(
+  seed_to_recreate,
+  filetype = "png",
+  polar = NULL,
+  ...,
+  img_path = default_img_path(),
+  logfile_path = default_logfile_path()
+)
 }
 \arguments{
-\item{seed_to_recreate}{the seed of the original image that either put in as a numeric value or vector from "get_seed_from_logfile()"}
+\item{seed_to_recreate}{the seed of the original image}
 
 \item{filetype}{set the file type for the image}
 
-\item{polar}{logical should the plot have a polar coordinate system ("polar = TRUE") or a cartesian coordinate system ("polar = FALSE")}
+\item{polar}{logical, overrides the coordinate system stored in the log file}
+
+\item{...}{further parameters overriding the logged ones, see `generate_img()`}
+
+\item{img_path}{directory the image is saved in. Defaults to the global variable
+`IMG_PATH` if it exists, otherwise `"img/everything/"`.}
+
+\item{logfile_path}{path of the log file. Defaults to the global variable `LOGFILE_PATH`
+if it exists, otherwise `"logfile/logfile.csv"`.}
 }
 \value{
-an image as png
+the path of the saved image (invisibly)
 }
 \description{
-This is the main function to recreate a previous generated image. It takes all relevant information from the log file to get exactly the same result. By using the same formula and the same seed you get the same randon numbers.
+This is the main function to recreate a previously generated image. It takes all relevant
+information from the log file to get exactly the same result: by using the same formula and
+the same seed you get the same random numbers. The plot parameters (polar, colors, alpha,
+etc.) are taken from the log file as well, but can be overridden, e.g. to render the same
+image in another color. Log entries written by older versions of the package do not contain
+these parameters; the current defaults are used for them.
 }
 \examples{
-regenerate_img(0104, polar = FALSE)
+\dontrun{
+regenerate_img(104)
+regenerate_img(104, color = "white", background_color = "black")
+}
 }
 \seealso{
 \code{\link{get_formula_from_logfile}} get the formula for recreation

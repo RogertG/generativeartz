@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^img$
+^readme\.md$
+^\.github$
+^logfile$
+^LICENSE$

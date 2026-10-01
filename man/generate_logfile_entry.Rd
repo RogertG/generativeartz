@@ -2,27 +2,44 @@
 % Please edit documentation in R/generate_logfile_entry.R
 \name{generate_logfile_entry}
 \alias{generate_logfile_entry}
-\title{Generate the generative image}
+\title{Append an entry to the logfile}
 \usage{
-generate_logfile_entry(logfile, formula, seed, file_name)
+generate_logfile_entry(
+  logfile,
+  formula,
+  seed,
+  file_name,
+  params = list(),
+  logfile_path = default_logfile_path()
+)
 }
 \arguments{
-\item{logfile}{the logfile}
+\item{logfile}{the logfile, as returned by `check_logfile_existence()`}
 
-\item{formula}{a string of the formula, that is used}
+\item{formula}{the formula list that is used}
 
 \item{seed}{the specific seed used}
 
 \item{file_name}{the file name of the image}
+
+\item{params}{named list of the data and plot parameters (see `generate_img()`).
+Missing values are filled with the package defaults.}
+
+\item{logfile_path}{path of the log file. Defaults to the global variable `LOGFILE_PATH`
+if it exists, otherwise `"logfile/logfile.csv"`.}
 }
 \value{
-a data frame and a saved csv-file
+the updated log data frame (invisibly); the log file is written as a side effect
 }
 \description{
-This function saves the information in order to recreate an image with random elements and appends it to the logfile.
+This function saves the information needed to recreate an image with random elements
+(seed, formula and all data and plot parameters) and appends it to the logfile.
 }
 \examples{
-generate_logfile_entry(logfile, formula, seed, file_name)
+path <- tempfile(fileext = ".csv")
+formula <- list(x = quote(sin(x_i)), y = quote(cos(y_i)))
+generate_logfile_entry(check_logfile_existence(path), formula, 42, "img.png",
+                       logfile_path = path)
 }
 \seealso{
 \code{\link{check_logfile_existence}} check, if there is a logfile

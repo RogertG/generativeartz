@@ -4,21 +4,31 @@
 \alias{get_formula_from_logfile}
 \title{Get a formula from the logfile}
 \usage{
-get_formula_from_logfile(seed_to_recreate, filetype)
+get_formula_from_logfile(
+  seed_to_recreate,
+  filetype = NULL,
+  logfile_path = default_logfile_path()
+)
 }
 \arguments{
-\item{seed_to_recreate}{the seed of the original image that either put in as a numeric value or vector from "get_seed_from_logfile()"}
+\item{seed_to_recreate}{the seed of the original image}
 
-\item{filetype}{set the file type for the image}
+\item{filetype}{unused, kept for backwards compatibility}
+
+\item{logfile_path}{path of the log file. Defaults to the global variable `LOGFILE_PATH`
+if it exists, otherwise `"logfile/logfile.csv"`.}
 }
 \value{
 a list containing the formula
 }
 \description{
 Extracts the formula of an image from the log file in order to be able to recreate the image.
+If the seed was used several times, the most recent entry is used.
 }
 \examples{
-get_formula_from_logfile(0104)
+\dontrun{
+get_formula_from_logfile(104)
+}
 }
 \seealso{
 \code{\link{get_seed_from_logfile}} get the seed, which is used as input
