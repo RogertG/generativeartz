@@ -7,17 +7,19 @@
 generate_seeds(nr_of_img)
 }
 \arguments{
-\item{nr_of_img}{a numeric input vector specifiying the number of images that should be generated.}
+\item{nr_of_img}{a numeric input specifying the number of images that should be generated.}
 }
 \value{
-numeric vector
+integer vector
 }
 \description{
-This function creates a vector of random numbers between 1 and 10000 that are used to set the seed. Since every images needs its own seed, the number of images you want to create equals the number of seeds.
+This function creates a vector of distinct random numbers between 1 and 10000 that are used
+to set the seed. Since every image needs its own seed, the number of images you want to
+create equals the number of seeds.
 }
 \examples{
-generate_seeds(3) #creates the seeds for three images
+generate_seeds(3) # creates the seeds for three images
 }
 \seealso{
-\code{\link{generate_filenames}} the file names are created based on the seed
+\code{\link{generate_filename}} the file names are created based on the seed
 }

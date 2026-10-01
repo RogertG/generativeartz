@@ -4,19 +4,24 @@
 \alias{get_seed_from_logfile}
 \title{Get one or several seeds from the logfile}
 \usage{
-get_seed_from_logfile(seed_to_recreate)
+get_seed_from_logfile(seed_to_recreate, logfile_path = default_logfile_path())
 }
 \arguments{
-\item{seed_to_recreate}{the seed of the original image that either put in as a numeric value or vector from "get_seed_from_logfile()"}
+\item{seed_to_recreate}{the seed (or seeds) of the original image(s)}
+
+\item{logfile_path}{path of the log file. Defaults to the global variable `LOGFILE_PATH`
+if it exists, otherwise `"logfile/logfile.csv"`.}
 }
 \value{
-a vector
+a vector of the seeds that are found in the log file
 }
 \description{
 Get one or several seeds from the logfile
 }
 \examples{
-get_seed_from_logfile(0104)
+\dontrun{
+get_seed_from_logfile(104)
+}
 }
 \seealso{
 \code{\link{get_formula_from_logfile}} get the formula for recreation

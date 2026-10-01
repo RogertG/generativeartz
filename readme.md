@@ -67,8 +67,36 @@ generativeart::generate_img(formula = my_formula, nr_of_img = 5, polar = TRUE, f
 * You can choose between cartesian and polar coordinate systems by setting `polar = TRUE` or `polar = FALSE`
 * You can choose the colors with `color = 'black'` and `background_color = 'hotpink'`
 * You can save the output image in various formats.
-Default is `png`, the alternatives are defined by the `device` options of [`ggplot::ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html).
-* the formula is a `list()`
+Default is `png`, the alternatives are defined by the `device` options of [`ggplot2::ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html).
+* the formula is a `list()` with the elements `x` and `y`, which can use the variables `x_i` and `y_i`
+
+### Parameters
+
+All parameters can be passed to `generate_img()` and are recorded in the log file:
+
+| Parameter | Default | Description |
+|---|---|---|
+| `polar` | `FALSE` | polar (`TRUE`) or cartesian (`FALSE`) coordinate system |
+| `color`, `background_color` | `"black"`, `"white"` | colors of the points and the background |
+| `alpha` | `0.2` | transparency of the points |
+| `size`, `shape` | `0`, `46` | point size and shape; `46` draws single pixels, `20` small dots |
+| `range_from`, `range_to` | `-2 * pi`, `2 * pi` | range of the base values `x_i` and `y_i` |
+| `step` | `0.01` | step between base values; smaller = denser image, but slower (points grow quadratically) |
+| `width`, `height` | `15`, `15` | image size in inches (not logged) |
+
+Paths can be set with the global variables `IMG_PATH` and `LOGFILE_PATH` as above, or passed explicitly with `img_path` and `logfile_path`.
+
+### Recreating images
+
+```r
+# recreate the image with seed 1821 exactly as it was logged
+generativeart::regenerate_img(1821)
+
+# same image, different colors
+generativeart::regenerate_img(1821, color = "white", background_color = "black")
+```
+
+Log entries written by older versions of the package only contain the seed and the formula; for those, the current defaults are used for all other parameters.
 
 ## Examples
 

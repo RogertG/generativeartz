@@ -16,12 +16,14 @@ setup_directories(img_path, img_subdir, img_subdir2, logfile_dir)
 \item{logfile_dir}{the log file directory}
 }
 \value{
-four dir within your working directory
+the created directories (invisibly)
 }
 \description{
 I use a certain directory structure for image creation. Every image is saved under "img/everything/". I use the directory "img/handpicked/" for a selection of good images. Moreover I create a directory for the log file.
 You only need to call this function one time.
 }
 \examples{
+\dontrun{
 setup_directories("img/", "everything/", "handpicked/", "logfile/")
+}
 }

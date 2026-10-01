@@ -4,10 +4,10 @@
 \alias{generate_filename}
 \title{Generate filenames}
 \usage{
-generate_filename(seed, filetype)
+generate_filename(seed, filetype = "png")
 }
 \arguments{
-\item{seed}{a numeric input generated with create_seeds()}
+\item{seed}{a numeric input generated with generate_seeds()}
 
 \item{filetype}{set the file type for the image}
 }
@@ -18,9 +18,8 @@ character vector, example: "2018-10-02-20-22_seed_22.png"
 This function creates file names dynamically. The file name depends on date, time and specific seed.
 }
 \examples{
-generate_filename(0104)
+generate_filename(104)
 }
 \seealso{
 \code{\link{generate_seeds}} where the seed input is randomly generated
 }
-\keyword{cats}

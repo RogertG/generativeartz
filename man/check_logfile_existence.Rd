@@ -4,18 +4,21 @@
 \alias{check_logfile_existence}
 \title{Check, if a logfile exists}
 \usage{
-check_logfile_existence()
+check_logfile_existence(logfile_path = default_logfile_path())
+}
+\arguments{
+\item{logfile_path}{path of the log file. Defaults to the global variable `LOGFILE_PATH`
+if it exists, otherwise `"logfile/logfile.csv"`.}
 }
 \value{
 a data frame
 }
 \description{
-This function loads the logfile, if it exists. If it doesn't, it will create one.
+This function loads the logfile, if it exists. If it doesn't, it returns an empty log
+with the expected columns.
 }
 \examples{
-\dontrun{
-check_logfile_existence()
-}
+check_logfile_existence(tempfile(fileext = ".csv"))
 }
 \seealso{
 \code{\link{generate_logfile_entry}} get the data to be logged

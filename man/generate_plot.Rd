@@ -7,33 +7,54 @@
 generate_plot(
   df,
   file_name,
-  polar,
-  filetype,
+  polar = FALSE,
+  filetype = "png",
   color = "black",
-  background_color = "white"
+  background_color = "white",
+  alpha = 0.2,
+  size = 0,
+  shape = 46,
+  width = 15,
+  height = 15,
+  img_path = default_img_path()
 )
 }
 \arguments{
 \item{df}{the data frame created with `generate_data()`}
 
-\item{file_name}{filetype of the final image. Default is `png`, for other options see the `devics` argument in `gggplot::gsave()`}
+\item{file_name}{the file name for saving the plot}
 
 \item{polar}{do you want to use a polar coordinate system? The default is a cartesian coordinate system.}
 
-\item{filetype}{set the file type for the image}
+\item{filetype}{file type of the final image. Default is `png`, for other options see the
+`device` argument in `ggplot2::ggsave()`}
 
-\item{color}{color of the points. default is black}
+\item{color}{color of the points. Default is black.}
 
-\item{background_color}{background color of the plaut. default is white.}
+\item{background_color}{background color of the plot. Default is white.}
+
+\item{alpha}{transparency of the points, between 0 and 1.}
+
+\item{size}{size of the points.}
+
+\item{shape}{shape of the points. The default `46` draws single pixels (`"."`),
+which is fast and gives fine textures; `20` gives small dots.}
+
+\item{width, height}{size of the saved image in inches.}
+
+\item{img_path}{directory the image is saved in. Defaults to the global variable
+`IMG_PATH` if it exists, otherwise `"img/everything/"`.}
 }
 \value{
-a png file
+the path of the saved image (invisibly)
 }
 \description{
-This function plots previously created data.
+This function plots previously created data and saves it to a file.
 }
 \examples{
+\dontrun{
 generate_plot(df, file_name, polar = FALSE)
+}
 }
 \seealso{
 \code{\link{generate_data}} where the data is created
